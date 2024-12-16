@@ -2,20 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
+
+
+
+
+
+/* Light Mode Styles */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+button {
+  transition: background-color 0.2s ease;
+}
+
+
+/* Dark Mode Styles */
+.dark body {
+  background-color: #1a1a1a; /* Dark background */
+  color: #f9fafb; /* Light text */
+}
+
+.dark h1, .dark h2, .dark h3 {
+  color: #f9fafb; /* Light text for headings */
+}
+
+.dark button {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark button:hover {
+  background-color: #444;
+}
+
+
+
+
+
+
+
+
+
+
+/* Glowing effect for the logo when dark mode is enabled */
+.logo-glow {
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  transition: filter 0.3s ease-in-out;
 }
