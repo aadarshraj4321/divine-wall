@@ -2678,190 +2678,190 @@
 
 
 
-// "use client"
-// import React, { useState, useEffect, useMemo, useCallback } from 'react';
-// import Head from 'next/head';
-// import Header from './components/Header';
-// import WallpaperCard from './components/WallpaperCard';
-// import Search from './components/Search';
-// import Pagination from './components/Pagination';
-// import MotionDiv from './components/MotionDiv';
-// import Image from 'next/image'; // Optimized image loading
+"use client"
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import Head from 'next/head';
+import Header from './components/Header';
+import WallpaperCard from './components/WallpaperCard';
+import Search from './components/Search';
+import Pagination from './components/Pagination';
+import MotionDiv from './components/MotionDiv';
+import Image from 'next/image'; // Optimized image loading
 
-// type Wallpaper = {
-//   id?: string;
-//   title: string;
-//   image_url: string;
-//   category?: string;
-//   resolution?: string;
-// };
+type Wallpaper = {
+  id?: string;
+  title: string;
+  image_url: string;
+  category?: string;
+  resolution?: string;
+};
 
-// const Dashboard = () => {
-//   const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
-//   const [loading, setLoading] = useState<boolean>(true);
-//   const [searchResults, setSearchResults] = useState<Wallpaper[]>([]);
-//   const [currentPage, setCurrentPage] = useState<number>(1);
-//   const [searching, setSearching] = useState(false);
-//   const [selectedCategory, setSelectedCategory] = useState<string>('');
-//   const itemsPerPage = 20;
+const Dashboard = () => {
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [searchResults, setSearchResults] = useState<Wallpaper[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searching, setSearching] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const itemsPerPage = 20;
 
-//   // Define the category map with a string index signature
-//   const categoryMap: { [key: string]: string } = useMemo(() => ({
-//     'Lord Rama': 'ram',
-//     'Lord Krishna': 'krishna',
-//     'All God': 'all_god',
-//     'Hanuman': 'hanuman',
-//     'Shiva': 'shiva',
-//     'Mata Durga': 'durga',
-//     'Mata Kali': 'kali',
-//     'Fiction': 'fiction',
-//     'Mythology': 'mythology',
-//     'Spirituality': 'spirituality',
-//     'Ganesha': 'ganesha',
-//     'Monsters': 'monsters',
-//     'Mahabharat': 'mahabharat',
-//     'Ramayan': 'ramayan',
-//   }), []);
+  // Define the category map with a string index signature
+  const categoryMap: { [key: string]: string } = useMemo(() => ({
+    'Lord Rama': 'ram',
+    'Lord Krishna': 'krishna',
+    'All God': 'all_god',
+    'Hanuman': 'hanuman',
+    'Shiva': 'shiva',
+    'Mata Durga': 'durga',
+    'Mata Kali': 'kali',
+    'Fiction': 'fiction',
+    'Mythology': 'mythology',
+    'Spirituality': 'spirituality',
+    'Ganesha': 'ganesha',
+    'Monsters': 'monsters',
+    'Mahabharat': 'mahabharat',
+    'Ramayan': 'ramayan',
+  }), []);
 
-//   const fetchWallpapers = useCallback(async (category: string) => {
-//     setLoading(true);
-//     try {
-//       const url = category ? `/api/wallpapers/category?category=${category}` : '/api/wallpapers';
-//       const res = await fetch(url);
-//       const data = await res.json();
-//       if (res.ok && Array.isArray(data)) {
-//         setWallpapers(data);
-//       } else {
-//         setWallpapers([]);
-//       }
-//     } catch (error) {
-//       setWallpapers([]);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, []);
+  const fetchWallpapers = useCallback(async (category: string) => {
+    setLoading(true);
+    try {
+      const url = category ? `/api/wallpapers/category?category=${category}` : '/api/wallpapers';
+      const res = await fetch(url);
+      const data = await res.json();
+      if (res.ok && Array.isArray(data)) {
+        setWallpapers(data);
+      } else {
+        setWallpapers([]);
+      }
+    } catch (error) {
+      setWallpapers([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-//   useEffect(() => {
-//     fetchWallpapers(selectedCategory);
-//   }, [selectedCategory, fetchWallpapers]);
+  useEffect(() => {
+    fetchWallpapers(selectedCategory);
+  }, [selectedCategory, fetchWallpapers]);
 
-//   const handleSearchResults = (results: Wallpaper[]) => {
-//     setSearching(true);
-//     setSearchResults(Array.isArray(results) ? results : []);
-//     setCurrentPage(1);
-//   };
+  const handleSearchResults = (results: Wallpaper[]) => {
+    setSearching(true);
+    setSearchResults(Array.isArray(results) ? results : []);
+    setCurrentPage(1);
+  };
 
-//   const handleBackToDashboard = () => {
-//     setSearching(false);
-//     setSearchResults([]);
-//     setCurrentPage(1);
-//   };
+  const handleBackToDashboard = () => {
+    setSearching(false);
+    setSearchResults([]);
+    setCurrentPage(1);
+  };
 
-//   const displayItems = searching ? searchResults : wallpapers;
-//   const safeDisplayItems = Array.isArray(displayItems) ? displayItems : [];
+  const displayItems = searching ? searchResults : wallpapers;
+  const safeDisplayItems = Array.isArray(displayItems) ? displayItems : [];
 
-//   const indexOfLastItem = currentPage * itemsPerPage;
-//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-//   const currentItems = useMemo(() => safeDisplayItems.slice(indexOfFirstItem, indexOfLastItem), [safeDisplayItems, indexOfFirstItem, indexOfLastItem]);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = useMemo(() => safeDisplayItems.slice(indexOfFirstItem, indexOfLastItem), [safeDisplayItems, indexOfFirstItem, indexOfLastItem]);
 
-//   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-//   const handleCategoryClick = (category: string) => {
-//     if (selectedCategory === category) {
-//       setSelectedCategory('');
-//     } else {
-//       setSelectedCategory(category);
-//     }
-//   };
+  const handleCategoryClick = (category: string) => {
+    if (selectedCategory === category) {
+      setSelectedCategory('');
+    } else {
+      setSelectedCategory(category);
+    }
+  };
 
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-[#f5f7fa] to-[#e8edf3] dark:from-slate-900 dark:to-slate-800 text-gray-900 dark:text-white">
-//       <Head>
-//         <title>DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds</title>
-//         <meta name="description" content="Download high-quality spiritual wallpapers featuring Hindu gods like Shiva, Ram, Krishna, Hanuman, Durga, and more. Perfect for phones, tablets, and desktops." />
-//         <meta name="keywords" content="Hindu god wallpapers, spiritual wallpapers, Shiva wallpapers, Ram wallpapers, Krishna, Ganesha, Hanuman, Durga, 4K wallpapers, phone wallpapers, HD wallpapers, Mahabharat, Ramayan" />
-//         <meta name="author" content="DivineWall Team" />
-//         <meta property="og:title" content="DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds" />
-//         <meta property="og:description" content="Browse and download divine spiritual wallpapers of Hindu gods like Shiva, Krishna, Ram, Hanuman, and more. Available in 4K and HD quality." />
-//         <meta property="og:image" content="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
-//         <meta property="og:image:alt" content="Hindu god wallpaper" />
-//         <meta property="og:url" content="https://divinewall.in" />
-//         <meta name="twitter:card" content="summary_large_image" />
-//         <meta name="twitter:title" content="DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds" />
-//         <meta name="twitter:description" content="Explore and download spiritual wallpapers of Hindu gods in high resolution. Wallpapers featuring Shiva, Krishna, Ram, Hanuman, Durga, and more." />
-//         <meta name="twitter:image" content="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
-//         <link rel="canonical" href="https://divinewall.in" />
-//       </Head>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#f5f7fa] to-[#e8edf3] dark:from-slate-900 dark:to-slate-800 text-gray-900 dark:text-white">
+      <Head>
+        <title>DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds</title>
+        <meta name="description" content="Download high-quality spiritual wallpapers featuring Hindu gods like Shiva, Ram, Krishna, Hanuman, Durga, and more. Perfect for phones, tablets, and desktops." />
+        <meta name="keywords" content="Hindu god wallpapers, spiritual wallpapers, Shiva wallpapers, Ram wallpapers, Krishna, Ganesha, Hanuman, Durga, 4K wallpapers, phone wallpapers, HD wallpapers, Mahabharat, Ramayan" />
+        <meta name="author" content="DivineWall Team" />
+        <meta property="og:title" content="DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds" />
+        <meta property="og:description" content="Browse and download divine spiritual wallpapers of Hindu gods like Shiva, Krishna, Ram, Hanuman, and more. Available in 4K and HD quality." />
+        <meta property="og:image" content="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
+        <meta property="og:image:alt" content="Hindu god wallpaper" />
+        <meta property="og:url" content="https://divinewall.in" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="DivineWall - Hindu God Wallpapers & 4K HD Spiritual Backgrounds" />
+        <meta name="twitter:description" content="Explore and download spiritual wallpapers of Hindu gods in high resolution. Wallpapers featuring Shiva, Krishna, Ram, Hanuman, Durga, and more." />
+        <meta name="twitter:image" content="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
+        <link rel="canonical" href="https://divinewall.in" />
+      </Head>
 
-//       <div className="relative z-10">
-//         <Header />
-//         <Search onSearch={handleSearchResults} backgroundImage="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
+      <div className="relative z-10">
+        <Header />
+        <Search onSearch={handleSearchResults} backgroundImage="https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg" />
 
-//         <div className="bg-gray-100 dark:bg-slate-800 rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl">
-//           <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
-//           <div className="flex flex-wrap justify-center gap-4">
-//             {Object.keys(categoryMap).map((category) => (
-//               <button
-//                 key={category}
-//                 onClick={() => handleCategoryClick(categoryMap[category] || '')}
-//                 className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform ${selectedCategory === categoryMap[category] ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white' : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-500 dark:hover:bg-gray-500'} hover:scale-105`}>
-//                 {category}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
+        <div className="bg-gray-100 dark:bg-slate-800 rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl">
+          <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {Object.keys(categoryMap).map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryClick(categoryMap[category] || '')}
+                className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform ${selectedCategory === categoryMap[category] ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white' : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-500 dark:hover:bg-gray-500'} hover:scale-105`}>
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
 
-//         <MotionDiv>
-//           {loading ? (
-//             <div className="flex justify-center items-center h-64">
-//               <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-//             </div>
-//           ) : (
-//             <>
-//               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-//                 {currentItems.map((wallpaper, index) => (
-//                   <WallpaperCard
-//                     key={wallpaper.id || index}
-//                     title={wallpaper.title}
-//                     imageUrl={wallpaper.image_url}
-//                     category={wallpaper.category || 'Spiritual'}
-//                     resolution={wallpaper.resolution || '4K'}
-//                     onClick={() => console.log('Wallpaper clicked!')}
-//                   />
-//                 ))}
-//               </div>
+        <MotionDiv>
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+                {currentItems.map((wallpaper, index) => (
+                  <WallpaperCard
+                    key={wallpaper.id || index}
+                    title={wallpaper.title}
+                    imageUrl={wallpaper.image_url}
+                    category={wallpaper.category || 'Spiritual'}
+                    resolution={wallpaper.resolution || '4K'}
+                    onClick={() => console.log('Wallpaper clicked!')}
+                  />
+                ))}
+              </div>
 
-//               {safeDisplayItems.length > itemsPerPage && (
-//                 <Pagination
-//                   itemsPerPage={itemsPerPage}
-//                   totalItems={safeDisplayItems.length}
-//                   paginate={paginate}
-//                   currentPage={currentPage}
-//                 />
-//               )}
+              {safeDisplayItems.length > itemsPerPage && (
+                <Pagination
+                  itemsPerPage={itemsPerPage}
+                  totalItems={safeDisplayItems.length}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
+              )}
 
-//               {searching && safeDisplayItems.length === 0 && (
-//                 <div className="text-center py-12">
-//                   <h2 className="text-2xl font-semibold text-gray-600 dark:text-gray-300 mb-4">
-//                     No wallpapers found
-//                   </h2>
-//                   <button
-//                     onClick={handleBackToDashboard}
-//                     className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
-//                   >
-//                     Back to Dashboard
-//                   </button>
-//                 </div>
-//               )}
-//             </>
-//           )}
-//         </MotionDiv>
-//       </div>
-//     </div>
-//   );
-// };
+              {searching && safeDisplayItems.length === 0 && (
+                <div className="text-center py-12">
+                  <h2 className="text-2xl font-semibold text-gray-600 dark:text-gray-300 mb-4">
+                    No wallpapers found
+                  </h2>
+                  <button
+                    onClick={handleBackToDashboard}
+                    className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition"
+                  >
+                    Back to Dashboard
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </MotionDiv>
+      </div>
+    </div>
+  );
+};
 
-// export default Dashboard;
+export default Dashboard;
 
 
 
@@ -3921,183 +3921,183 @@
 
 
 
-"use client";
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Search as SearchIcon } from 'lucide-react';
-import WallpaperCard from './components/WallpaperCard';
-import Pagination from './components/Pagination';
-import Header from './components/Header'; // Import Header component
+// "use client";
+// import React, { useState, useEffect, useMemo, useCallback } from 'react';
+// import { Search as SearchIcon } from 'lucide-react';
+// import WallpaperCard from './components/WallpaperCard';
+// import Pagination from './components/Pagination';
+// import Header from './components/Header'; // Import Header component
 
-type Wallpaper = {
-  id?: string;
-  title: string;
-  image_url: string;
-  category?: string;
-  resolution?: string;
-};
+// type Wallpaper = {
+//   id?: string;
+//   title: string;
+//   image_url: string;
+//   category?: string;
+//   resolution?: string;
+// };
 
-const Dashboard = () => {
-  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const itemsPerPage = 20;
+// const Dashboard = () => {
+//   const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
+//   const [loading, setLoading] = useState<boolean>(true);
+//   const [currentPage, setCurrentPage] = useState<number>(1);
+//   const [selectedCategory, setSelectedCategory] = useState<string>('');
+//   const [searchTerm, setSearchTerm] = useState<string>('');
+//   const itemsPerPage = 20;
 
-  const backgroundImage = "https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg";
+//   const backgroundImage = "https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg";
 
-  const categoryMap: { [key: string]: string } = useMemo(() => ({
-    'Lord Rama': 'ram',
-    'Lord Krishna': 'krishna',
-    'All God': 'all_god',
-    'Hanuman': 'hanuman',
-    'Shiva': 'shiva',
-    'Mata Durga': 'durga',
-    'Mata Kali': 'kali',
-    'Fiction': 'fiction',
-    'Mythology': 'mythology',
-    'Spirituality': 'spirituality',
-    'Ganesha': 'ganesha',
-    'Monsters': 'monsters',
-    'Mahabharat': 'mahabharat',
-    'Ramayan': 'ramayan',
-  }), []);
+//   const categoryMap: { [key: string]: string } = useMemo(() => ({
+//     'Lord Rama': 'ram',
+//     'Lord Krishna': 'krishna',
+//     'All God': 'all_god',
+//     'Hanuman': 'hanuman',
+//     'Shiva': 'shiva',
+//     'Mata Durga': 'durga',
+//     'Mata Kali': 'kali',
+//     'Fiction': 'fiction',
+//     'Mythology': 'mythology',
+//     'Spirituality': 'spirituality',
+//     'Ganesha': 'ganesha',
+//     'Monsters': 'monsters',
+//     'Mahabharat': 'mahabharat',
+//     'Ramayan': 'ramayan',
+//   }), []);
 
-  const fetchWallpapers = useCallback(async (category: string) => {
-    setLoading(true);
-    try {
-      const url = category ? `/api/wallpapers/category?category=${category}` : '/api/wallpapers';
-      const res = await fetch(url);
-      const data = await res.json();
-      if (res.ok && Array.isArray(data)) {
-        setWallpapers(data);
-      } else {
-        setWallpapers([]);
-      }
-    } catch (error) {
-      console.log(error);
-      setWallpapers([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+//   const fetchWallpapers = useCallback(async (category: string) => {
+//     setLoading(true);
+//     try {
+//       const url = category ? `/api/wallpapers/category?category=${category}` : '/api/wallpapers';
+//       const res = await fetch(url);
+//       const data = await res.json();
+//       if (res.ok && Array.isArray(data)) {
+//         setWallpapers(data);
+//       } else {
+//         setWallpapers([]);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//       setWallpapers([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
 
-  useEffect(() => {
-    fetchWallpapers(selectedCategory);
-  }, [selectedCategory, fetchWallpapers]);
+//   useEffect(() => {
+//     fetchWallpapers(selectedCategory);
+//   }, [selectedCategory, fetchWallpapers]);
 
-  const handleSearch = () => {
-    console.log('Searching for:', searchTerm);
-    // Ideally, implement search logic here
-  };
+//   const handleSearch = () => {
+//     console.log('Searching for:', searchTerm);
+//     // Ideally, implement search logic here
+//   };
 
-  const handleCategoryClick = (category: string) => {
-    if (selectedCategory === category) {
-      setSelectedCategory('');
-    } else {
-      setSelectedCategory(category);
-    }
-  };
+//   const handleCategoryClick = (category: string) => {
+//     if (selectedCategory === category) {
+//       setSelectedCategory('');
+//     } else {
+//       setSelectedCategory(category);
+//     }
+//   };
 
-  const displayItems = wallpapers;  // Directly use wallpapers (searching functionality removed for now)
-  const safeDisplayItems = Array.isArray(displayItems) ? displayItems : [];
+//   const displayItems = wallpapers;  // Directly use wallpapers (searching functionality removed for now)
+//   const safeDisplayItems = Array.isArray(displayItems) ? displayItems : [];
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = useMemo(() => safeDisplayItems.slice(indexOfFirstItem, indexOfLastItem), [safeDisplayItems, indexOfFirstItem, indexOfLastItem]);
+//   const indexOfLastItem = currentPage * itemsPerPage;
+//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+//   const currentItems = useMemo(() => safeDisplayItems.slice(indexOfFirstItem, indexOfLastItem), [safeDisplayItems, indexOfFirstItem, indexOfLastItem]);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+//   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
-      {/* Include the Header component */}
-      <Header />
+//   return (
+//     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+//       {/* Include the Header component */}
+//       <Header />
 
-      {/* Top Background Image with Glass Search */}
-      <div
-        className="relative h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 w-full max-w-2xl px-4">
-          <div className="flex">
-            <div className="relative w-full">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search wallpapers..."
-                className="w-full px-4 py-3 pl-10 bg-white/30 backdrop-blur-lg border border-white/20 rounded-l-lg text-lg text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <SearchIcon
-                size={24}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70"
-              />
-            </div>
-            <button
-              onClick={handleSearch}
-              className="bg-white/30 backdrop-blur-lg border border-white/20 text-white px-6 py-3 rounded-r-lg hover:bg-white/40 transition"
-            >
-              <SearchIcon size={24} />
-            </button>
-          </div>
-        </div>
-      </div>
+//       {/* Top Background Image with Glass Search */}
+//       <div
+//         className="relative h-[400px] bg-cover bg-center flex items-center justify-center"
+//         style={{ backgroundImage: `url(${backgroundImage})` }}
+//       >
+//         <div className="absolute inset-0 bg-black opacity-50"></div>
+//         <div className="relative z-10 w-full max-w-2xl px-4">
+//           <div className="flex">
+//             <div className="relative w-full">
+//               <input
+//                 type="text"
+//                 value={searchTerm}
+//                 onChange={(e) => setSearchTerm(e.target.value)}
+//                 placeholder="Search wallpapers..."
+//                 className="w-full px-4 py-3 pl-10 bg-white/30 backdrop-blur-lg border border-white/20 rounded-l-lg text-lg text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
+//               />
+//               <SearchIcon
+//                 size={24}
+//                 className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70"
+//               />
+//             </div>
+//             <button
+//               onClick={handleSearch}
+//               className="bg-white/30 backdrop-blur-lg border border-white/20 text-white px-6 py-3 rounded-r-lg hover:bg-white/40 transition"
+//             >
+//               <SearchIcon size={24} />
+//             </button>
+//           </div>
+//         </div>
+//       </div>
 
-      {/* Categories Section */}
-      <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-white dark:bg-slate-800">
-        <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {Object.keys(categoryMap).map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryClick(categoryMap[category] || '')}
-              className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform ${
-                selectedCategory === categoryMap[category]
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white'
-                  : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-500 dark:hover:bg-gray-500'
-              } hover:scale-105`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
+//       {/* Categories Section */}
+//       <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-white dark:bg-slate-800">
+//         <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
+//         <div className="flex flex-wrap justify-center gap-4">
+//           {Object.keys(categoryMap).map((category) => (
+//             <button
+//               key={category}
+//               onClick={() => handleCategoryClick(categoryMap[category] || '')}
+//               className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform ${
+//                 selectedCategory === categoryMap[category]
+//                   ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white'
+//                   : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-500 dark:hover:bg-gray-500'
+//               } hover:scale-105`}
+//             >
+//               {category}
+//             </button>
+//           ))}
+//         </div>
+//       </div>
 
-      {/* Wallpapers Grid */}
-      <div className="container mx-auto px-4">
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-              {currentItems.map((wallpaper, index) => (
-                <WallpaperCard
-                  key={wallpaper.id || index}
-                  title={wallpaper.title}
-                  imageUrl={wallpaper.image_url}
-                  category={wallpaper.category || 'Spiritual'}
-                  resolution={wallpaper.resolution || '4K'}
-                  onClick={() => console.log('Wallpaper clicked!')}
-                />
-              ))}
-            </div>
+//       {/* Wallpapers Grid */}
+//       <div className="container mx-auto px-4">
+//         {loading ? (
+//           <div className="flex justify-center items-center h-64">
+//             <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+//           </div>
+//         ) : (
+//           <>
+//             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+//               {currentItems.map((wallpaper, index) => (
+//                 <WallpaperCard
+//                   key={wallpaper.id || index}
+//                   title={wallpaper.title}
+//                   imageUrl={wallpaper.image_url}
+//                   category={wallpaper.category || 'Spiritual'}
+//                   resolution={wallpaper.resolution || '4K'}
+//                   onClick={() => console.log('Wallpaper clicked!')}
+//                 />
+//               ))}
+//             </div>
 
-            {safeDisplayItems.length > itemsPerPage && (
-              <Pagination
-                itemsPerPage={itemsPerPage}
-                totalItems={safeDisplayItems.length}
-                paginate={paginate}
-                currentPage={currentPage}
-              />
-            )}
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
+//             {safeDisplayItems.length > itemsPerPage && (
+//               <Pagination
+//                 itemsPerPage={itemsPerPage}
+//                 totalItems={safeDisplayItems.length}
+//                 paginate={paginate}
+//                 currentPage={currentPage}
+//               />
+//             )}
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
 
-export default Dashboard;
+// export default Dashboard;
