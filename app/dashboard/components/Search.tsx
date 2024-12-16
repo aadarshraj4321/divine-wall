@@ -428,117 +428,117 @@
 
 
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search as SearchIcon } from 'lucide-react';
+// import React, { useState } from 'react';
+// import { motion } from 'framer-motion';
+// import { Search as SearchIcon } from 'lucide-react';
 
-// Define the shape of the search result
-interface SearchResult {
-  id: string;
-  title: string;
-  url: string;
-}
+// // Define the shape of the search result
+// interface SearchResult {
+//   id: string;
+//   title: string;
+//   url: string;
+// }
 
-const Search = ({
-  onSearch,
-  backgroundImage,
-}: {
-  onSearch: (results: SearchResult[]) => void;
-  backgroundImage?: string;
-}) => {
-  const [query, setQuery] = useState('');
-  const [isFocused, setIsFocused] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+// const Search = ({
+//   onSearch,
+//   backgroundImage,
+// }: {
+//   onSearch: (results: SearchResult[]) => void;
+//   backgroundImage?: string;
+// }) => {
+//   const [query, setQuery] = useState('');
+//   const [isFocused, setIsFocused] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
 
-  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
+//   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setQuery(e.target.value);
+//   };
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query) return;
+//   const handleSearch = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (!query) return;
 
-    setLoading(true);
-    setError(null);
+//     setLoading(true);
+//     setError(null);
 
-    try {
-      const res = await fetch(`/api/search?query=${query}`);
-      const data = await res.json();
+//     try {
+//       const res = await fetch(`/api/search?query=${query}`);
+//       const data = await res.json();
 
-      if (res.ok) {
-        onSearch(data);
-      } else {
-        setError(data.error || 'An error occurred while searching');
-        onSearch([]);
-      }
-    } catch (error) {
-      setError('An error occurred while searching');
-      onSearch([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+//       if (res.ok) {
+//         onSearch(data);
+//       } else {
+//         setError(data.error || 'An error occurred while searching');
+//         onSearch([]);
+//       }
+//     } catch (error) {
+//       setError('An error occurred while searching');
+//       onSearch([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
-  return (
-    <div
-      className="relative h-[50vh] flex items-center justify-center"
-      style={{
-        backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/70 dark:to-slate-900/70"></div>
+//   return (
+//     <div
+//       className="relative h-[50vh] flex items-center justify-center"
+//       style={{
+//         backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
+//         backgroundSize: 'cover',
+//         backgroundPosition: 'center',
+//         backgroundAttachment: 'fixed',
+//       }}
+//     >
+//       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/70 dark:to-slate-900/70"></div>
       
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-3xl px-4"
-      >
-        <form onSubmit={handleSearch} className="w-full">
-          <motion.div
-            animate={{
-              scale: isFocused ? 1.02 : 1,
-              boxShadow: isFocused
-                ? '0 15px 30px -10px rgba(0, 0, 0, 0.2)'
-                : '0 10px 25px -15px rgba(0, 0, 0, 0.1)',
-            }}
-            transition={{ duration: 0.2 }}
-            className="flex items-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full overflow-hidden shadow-xl"
-          >
-            <div className="absolute left-5 text-gray-500 dark:text-gray-300">
-              <SearchIcon size={24} />
-            </div>
-            <input
-              type="text"
-              className="w-full pl-14 pr-4 py-4 text-xl text-gray-800 dark:text-white bg-transparent border-none focus:outline-none"
-              placeholder="Search for spiritual wallpapers..."
-              value={query}
-              onChange={handleQueryChange}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
-          </motion.div>
-        </form>
+//       <motion.div
+//         initial={{ opacity: 0, y: 50 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.5 }}
+//         className="relative z-10 w-full max-w-3xl px-4"
+//       >
+//         <form onSubmit={handleSearch} className="w-full">
+//           <motion.div
+//             animate={{
+//               scale: isFocused ? 1.02 : 1,
+//               boxShadow: isFocused
+//                 ? '0 15px 30px -10px rgba(0, 0, 0, 0.2)'
+//                 : '0 10px 25px -15px rgba(0, 0, 0, 0.1)',
+//             }}
+//             transition={{ duration: 0.2 }}
+//             className="flex items-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full overflow-hidden shadow-xl"
+//           >
+//             <div className="absolute left-5 text-gray-500 dark:text-gray-300">
+//               <SearchIcon size={24} />
+//             </div>
+//             <input
+//               type="text"
+//               className="w-full pl-14 pr-4 py-4 text-xl text-gray-800 dark:text-white bg-transparent border-none focus:outline-none"
+//               placeholder="Search for spiritual wallpapers..."
+//               value={query}
+//               onChange={handleQueryChange}
+//               onFocus={() => setIsFocused(true)}
+//               onBlur={() => setIsFocused(false)}
+//             />
+//           </motion.div>
+//         </form>
 
-        {loading && (
-          <div className="mt-4 text-center text-gray-600 dark:text-gray-300">
-            Searching for divine inspiration...
-          </div>
-        )}
+//         {loading && (
+//           <div className="mt-4 text-center text-gray-600 dark:text-gray-300">
+//             Searching for divine inspiration...
+//           </div>
+//         )}
 
-        {error && (
-          <div className="mt-4 text-center text-red-500">{error}</div>
-        )}
-      </motion.div>
-    </div>
-  );
-};
+//         {error && (
+//           <div className="mt-4 text-center text-red-500">{error}</div>
+//         )}
+//       </motion.div>
+//     </div>
+//   );
+// };
 
-export default Search;
+// export default Search;
 
 
 
@@ -683,131 +683,131 @@ export default Search;
 
 
 
-// import React, { useState, useCallback, useMemo } from 'react';
-// import { motion } from 'framer-motion';
-// import { Search as SearchIcon } from 'lucide-react';
+import React, { useState, useCallback, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { Search as SearchIcon } from 'lucide-react';
 
-// // Define the type for search results
-// type Wallpaper = {
-//   id: string;
-//   title: string;
-//   imageUrl: string;
-//   // Add more fields as per your data structure
-// };
+// Define the type for search results
+type Wallpaper = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  // Add more fields as per your data structure
+};
 
-// type SearchProps = {
-//   onSearch: (results: Wallpaper[]) => void;
-//   backgroundImage?: string;
-// };
+type SearchProps = {
+  onSearch: (results: Wallpaper[]) => void;
+  backgroundImage?: string;
+};
 
-// const Search = ({ onSearch, backgroundImage }: SearchProps) => {
-//   const [query, setQuery] = useState('');
-//   const [isFocused, setIsFocused] = useState(false);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState<string | null>(null);
+const Search = ({ onSearch, backgroundImage }: SearchProps) => {
+  const [query, setQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-//   // Declare handleSearch before useMemo
-//   const handleSearch = useCallback(async () => {
-//     if (!query) return;
+  // Declare handleSearch before useMemo
+  const handleSearch = useCallback(async () => {
+    if (!query) return;
 
-//     setLoading(true);
-//     setError(null);
+    setLoading(true);
+    setError(null);
 
-//     try {
-//       const res = await fetch(`/api/search?query=${query}`);
-//       const data = await res.json();
+    try {
+      const res = await fetch(`/api/search?query=${query}`);
+      const data = await res.json();
 
-//       if (res.ok) {
-//         onSearch(data); // onSearch expects Wallpaper[]
-//       } else {
-//         setError(data.error || 'An error occurred while searching');
-//         onSearch([]); // In case of error, clear results
-//       }
-//     } catch (error) {
-//       console.log(error);
-//       setError('An error occurred while searching');
-//       onSearch([]); // In case of error, clear results
-//     } finally {
-//       setLoading(false);
-//     }
-//   }, [query, onSearch]);
+      if (res.ok) {
+        onSearch(data); // onSearch expects Wallpaper[]
+      } else {
+        setError(data.error || 'An error occurred while searching');
+        onSearch([]); // In case of error, clear results
+      }
+    } catch (error) {
+      console.log(error);
+      setError('An error occurred while searching');
+      onSearch([]); // In case of error, clear results
+    } finally {
+      setLoading(false);
+    }
+  }, [query, onSearch]);
 
-//   // Debouncing the search query to limit the number of API requests
-//   useMemo(() => {
-//     const timer = setTimeout(() => {
-//       if (query) {
-//         handleSearch(); // Now handleSearch can be used
-//       }
-//     }, 500); // 500ms debounce delay
-//     return () => clearTimeout(timer);
-//   }, [query, handleSearch]); // Add handleSearch to the dependency array
+  // Debouncing the search query to limit the number of API requests
+  useMemo(() => {
+    const timer = setTimeout(() => {
+      if (query) {
+        handleSearch(); // Now handleSearch can be used
+      }
+    }, 500); // 500ms debounce delay
+    return () => clearTimeout(timer);
+  }, [query, handleSearch]); // Add handleSearch to the dependency array
 
-//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setQuery(e.target.value);
-//     setError(null); // Clear error when the user starts typing again
-//   };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setError(null); // Clear error when the user starts typing again
+  };
 
-//   const handleFocus = () => setIsFocused(true);
-//   const handleBlur = () => setIsFocused(false);
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
-//   return (
-//     <div
-//       className="relative h-[50vh] flex items-center justify-center"
-//       style={{
-//         backgroundImage: `url(${backgroundImage})`,
-//         backgroundSize: 'cover',
-//         backgroundPosition: 'center',
-//         backgroundAttachment: 'fixed',
-//       }}
-//     >
-//       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 dark:to-slate-900/70"></div>
+  return (
+    <div
+      className="relative h-[50vh] flex items-center justify-center"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 dark:to-slate-900/70"></div>
 
-//       <motion.div
-//         initial={{ opacity: 0, y: 50 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5 }}
-//         className="relative z-10 w-full max-w-3xl px-4"
-//       >
-//         <form onSubmit={(e) => e.preventDefault()} className="w-full">
-//           <motion.div
-//             animate={{
-//               scale: isFocused ? 1.02 : 1,
-//               boxShadow: isFocused
-//                 ? '0 15px 30px -10px rgba(0, 0, 0, 0.2)'
-//                 : '0 10px 25px -15px rgba(0, 0, 0, 0.1)',
-//             }}
-//             transition={{ duration: 0.2 }}
-//             className="flex items-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full overflow-hidden shadow-xl"
-//           >
-//             <div className="absolute left-5 text-gray-500 dark:text-gray-300">
-//               <SearchIcon size={24} />
-//             </div>
-//             <input
-//               type="text"
-//               className="w-full pl-14 pr-4 py-4 text-xl text-gray-800 dark:text-white bg-transparent border-none focus:outline-none"
-//               placeholder="Search for spiritual wallpapers..."
-//               value={query}
-//               onChange={handleInputChange}
-//               onFocus={handleFocus}
-//               onBlur={handleBlur}
-//             />
-//           </motion.div>
-//         </form>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative z-10 w-full max-w-3xl px-4"
+      >
+        <form onSubmit={(e) => e.preventDefault()} className="w-full">
+          <motion.div
+            animate={{
+              scale: isFocused ? 1.02 : 1,
+              boxShadow: isFocused
+                ? '0 15px 30px -10px rgba(0, 0, 0, 0.2)'
+                : '0 10px 25px -15px rgba(0, 0, 0, 0.1)',
+            }}
+            transition={{ duration: 0.2 }}
+            className="flex items-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full overflow-hidden shadow-xl"
+          >
+            <div className="absolute left-5 text-gray-500 dark:text-gray-300">
+              <SearchIcon size={24} />
+            </div>
+            <input
+              type="text"
+              className="w-full pl-14 pr-4 py-4 text-xl text-gray-800 dark:text-white bg-transparent border-none focus:outline-none"
+              placeholder="Search for spiritual wallpapers..."
+              value={query}
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </motion.div>
+        </form>
 
-//         {loading && (
-//           <div className="mt-4 text-center text-gray-600 dark:text-gray-300">
-//             Searching for divine inspiration...
-//           </div>
-//         )}
+        {loading && (
+          <div className="mt-4 text-center text-gray-600 dark:text-gray-300">
+            Searching for divine inspiration...
+          </div>
+        )}
 
-//         {error && (
-//           <div className="mt-4 text-center text-red-500">{error}</div>
-//         )}
-//       </motion.div>
-//     </div>
-//   );
-// };
+        {error && (
+          <div className="mt-4 text-center text-red-500">{error}</div>
+        )}
+      </motion.div>
+    </div>
+  );
+};
 
-// export default Search;
+export default Search;
 
 
