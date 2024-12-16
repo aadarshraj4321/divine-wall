@@ -4045,7 +4045,7 @@ const Dashboard = () => {
       </div>
 
       {/* Categories Section */}
-      <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-white dark:bg-slate-800">
+      <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-gray-100 dark:bg-slate-800">
         <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
         <div className="flex flex-wrap justify-center gap-4">
           {Object.keys(categoryMap).map((category) => (
