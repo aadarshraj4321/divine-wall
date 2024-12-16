@@ -3975,6 +3975,7 @@ const Dashboard = () => {
         setWallpapers([]);
       }
     } catch (error) {
+      console.log(error);
       setWallpapers([]);
     } finally {
       setLoading(false);
