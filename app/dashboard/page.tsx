@@ -2686,7 +2686,6 @@ import WallpaperCard from './components/WallpaperCard';
 import Search from './components/Search';
 import Pagination from './components/Pagination';
 import MotionDiv from './components/MotionDiv';
-import Image from 'next/image'; // Optimized image loading
 
 type Wallpaper = {
   id?: string;
@@ -2735,6 +2734,7 @@ const Dashboard = () => {
         setWallpapers([]);
       }
     } catch (error) {
+      console.log(error);
       setWallpapers([]);
     } finally {
       setLoading(false);
