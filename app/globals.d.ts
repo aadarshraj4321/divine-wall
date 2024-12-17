@@ -1,7 +1,7 @@
-// globals.d.ts or any other .d.ts file in your project
+// globals.d.ts
 declare global {
     interface Window {
-      adsbygoogle: any;
+      adsbygoogle: { push: () => void }[];
     }
   }
   

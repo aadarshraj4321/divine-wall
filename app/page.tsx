@@ -39,6 +39,7 @@ export default function Home() {
         {/* Load the ad script only after the component has been mounted in the client */}
         <Script
           strategy="afterInteractive" // Ensures script is loaded after the page is interactive
+          id="adsense-script" // Added id attribute to satisfy Next.js requirement
         >
           {`
             (window.adsbygoogle = window.adsbygoogle || []).push({});
