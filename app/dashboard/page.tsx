@@ -4616,7 +4616,7 @@ const Dashboard = () => {
                 <p className="text-xl font-semibold text-gray-800 dark:text-white">
                   No Wallpaper Found. Try Another Wallpaper.
                 </p>
-                <Link href="/" passHref>
+                <Link href="/dashboard" passHref>
                   <button className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg">
                     Back to Dashboard
                   </button>
