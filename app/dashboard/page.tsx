@@ -5233,7 +5233,6 @@ import WallpaperCard from './components/WallpaperCard';
 import Pagination from './components/Pagination';
 import Header from './components/Header';
 import Search from './components/Search';
-import Link from 'next/link';
 
 const Dashboard = () => {
   const [displayWallpapers, setDisplayWallpapers] = useState<Wallpaper[]>([]);
