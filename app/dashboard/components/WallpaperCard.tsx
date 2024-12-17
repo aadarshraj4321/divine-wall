@@ -1394,10 +1394,203 @@
 
 
 
+// import React, { useState, useCallback } from 'react';
+// import Image from 'next/image';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import dynamic from 'next/dynamic';
+
+// // Dynamically import icons to reduce bundle size
+// const Download = dynamic(() => import('lucide-react').then((mod) => mod.Download));
+// const Heart = dynamic(() => import('lucide-react').then((mod) => mod.Heart));
+// const Expand = dynamic(() => import('lucide-react').then((mod) => mod.Expand));
+// const XCircle = dynamic(() => import('lucide-react').then((mod) => mod.XCircle));
+
+// type WallpaperCardProps = {
+//   title: string;
+//   imageUrl: string;
+//   resolution?: string;
+//   category?: string;
+//   onClick: () => void;
+// };
+
+// const WallpaperCard = ({ 
+//   title, 
+//   imageUrl, 
+//   resolution = '4K', 
+//   category = 'Spiritual'
+// }: WallpaperCardProps) => {
+//   const [isHovered, setIsHovered] = useState(false);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+
+//   // Move these outside of any conditional logic
+//   const openModal = useCallback(() => {
+//     setIsModalOpen(true);
+//   }, []);
+
+//   const closeModal = useCallback(() => {
+//     setIsModalOpen(false);
+//   }, []);
+
+//   const handleDownload = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();
+
+//     try {
+//       const response = await fetch(`/api/download?url=${encodeURIComponent(imageUrl)}`, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json' },
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Download failed');
+//       }
+
+//       const blob = await response.blob();
+//       const link = document.createElement('a');
+//       link.href = URL.createObjectURL(blob);
+//       link.download = title;
+//       link.click();
+//     } catch (error: unknown) {
+//       if (error instanceof Error) {
+//         console.error('Download error:', error.message);
+//       }
+//     }
+//   }, [imageUrl, title]);
+
+//   // Move the null check to a full render condition
+//   if (!imageUrl) {
+//     return null;
+//   }
+
+//   return (
+//     <>
+//       <motion.div
+//         initial={{ opacity: 0, y: 20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.4 }}
+//         className="relative group"
+//       >
+//         <div 
+//           onMouseEnter={() => setIsHovered(true)}
+//           onMouseLeave={() => setIsHovered(false)}
+//           className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
+//         >
+//           <div className="relative w-full aspect-[3/4] overflow-hidden">
+//             <Image
+//               src={imageUrl}
+//               alt={title}
+//               fill
+//               className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+//               priority
+//             /> 
+
+//             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//           </div>
+
+//           <AnimatePresence>
+//             {isHovered && (
+//               <motion.div 
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 exit={{ opacity: 0 }}
+//                 className="absolute inset-0 bg-black/30 flex items-center justify-center space-x-4"
+//               >
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={handleDownload}
+//                 >
+//                   <Download className="text-white" size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={(e) => { e.stopPropagation(); /* Favorite logic */ }}
+//                 >
+//                   <Heart className="text-white" size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={(e) => { e.stopPropagation(); openModal(); }}
+//                 >
+//                   <Expand className="text-white" size={24} />
+//                 </motion.button>
+//               </motion.div>
+//             )}
+//           </AnimatePresence>
+//         </div>
+
+//         <div className="mt-4 px-2">
+//           <div className="flex justify-between items-center">
+//             <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate max-w-[70%]">
+//               {title}
+//             </h3>
+//             <div className="flex space-x-2">
+//               <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+//                 {resolution}
+//               </span>
+//               <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+//                 {category}
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+
+//       {isModalOpen && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           exit={{ opacity: 0 }}
+//           className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+//           onClick={closeModal}
+//         >
+//           <div className="relative bg-black rounded-lg shadow-lg overflow-hidden max-w-3xl w-full transition-all">
+//             <button
+//               onClick={closeModal}
+//               className="absolute top-4 right-4 text-white bg-black/40 p-2 rounded-full hover:bg-black/60 transition"
+//             >
+//               <XCircle size={28} className="text-white" />
+//             </button>
+//             <Image
+//               src={imageUrl}
+//               alt={title}
+//               width={800}
+//               height={600}
+//               className="rounded-lg"
+//             />
+//           </div>
+//         </motion.div>
+//       )}
+//     </>
+//   );
+// };
+
+// export default React.memo(WallpaperCard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// components/WallpaperCard.tsx
+"use client";
+
 import React, { useState, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { Wallpaper } from '../types/Wallpaper';
 
 // Dynamically import icons to reduce bundle size
 const Download = dynamic(() => import('lucide-react').then((mod) => mod.Download));
@@ -1405,24 +1598,20 @@ const Heart = dynamic(() => import('lucide-react').then((mod) => mod.Heart));
 const Expand = dynamic(() => import('lucide-react').then((mod) => mod.Expand));
 const XCircle = dynamic(() => import('lucide-react').then((mod) => mod.XCircle));
 
-type WallpaperCardProps = {
-  title: string;
-  imageUrl: string;
-  resolution?: string;
-  category?: string;
-  onClick: () => void;
+type WallpaperCardProps = Omit<Wallpaper, 'id'> & {
+  onClick?: () => void;
 };
 
-const WallpaperCard = ({ 
+const WallpaperCard: React.FC<WallpaperCardProps> = ({ 
   title, 
-  imageUrl, 
+  image_url, 
   resolution = '4K', 
-  category = 'Spiritual'
-}: WallpaperCardProps) => {
+  category = 'Spiritual',
+  onClick
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Move these outside of any conditional logic
   const openModal = useCallback(() => {
     setIsModalOpen(true);
   }, []);
@@ -1435,7 +1624,7 @@ const WallpaperCard = ({
     e.stopPropagation();
 
     try {
-      const response = await fetch(`/api/download?url=${encodeURIComponent(imageUrl)}`, {
+      const response = await fetch(`/api/download?url=${encodeURIComponent(image_url)}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -1454,10 +1643,9 @@ const WallpaperCard = ({
         console.error('Download error:', error.message);
       }
     }
-  }, [imageUrl, title]);
+  }, [image_url, title]);
 
-  // Move the null check to a full render condition
-  if (!imageUrl) {
+  if (!image_url) {
     return null;
   }
 
@@ -1468,6 +1656,7 @@ const WallpaperCard = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="relative group"
+        onClick={onClick}
       >
         <div 
           onMouseEnter={() => setIsHovered(true)}
@@ -1476,7 +1665,7 @@ const WallpaperCard = ({
         >
           <div className="relative w-full aspect-[3/4] overflow-hidden">
             <Image
-              src={imageUrl}
+              src={image_url}
               alt={title}
               fill
               className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
@@ -1553,7 +1742,7 @@ const WallpaperCard = ({
               <XCircle size={28} className="text-white" />
             </button>
             <Image
-              src={imageUrl}
+              src={image_url}
               alt={title}
               width={800}
               height={600}
@@ -1567,4 +1756,3 @@ const WallpaperCard = ({
 };
 
 export default React.memo(WallpaperCard);
-
