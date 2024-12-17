@@ -1094,7 +1094,7 @@
 
 
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';  // Import SearchIcon
 import { motion } from 'framer-motion';
 import { Wallpaper } from '../types/Wallpaper';
@@ -1122,6 +1122,7 @@ const Search = ({ onSearch, backgroundImage }: { onSearch: (results: Wallpaper[]
         onSearch([]);
       }
     } catch (error) {
+      console.log(error);
       setError('An error occurred while searching');
       onSearch([]);
     } finally {
