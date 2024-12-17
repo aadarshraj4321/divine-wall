@@ -963,55 +963,187 @@
 
 
 
+// import React, { useState, useCallback } from 'react';
+// import { motion } from 'framer-motion';
+// import { Search as SearchIcon } from 'lucide-react';
+// import { Wallpaper } from '../types/Wallpaper';
+
+// type SearchProps = {
+//   onSearch: (results: Wallpaper[]) => void;
+//   backgroundImage?: string;
+// };
+
+// const Search = ({ onSearch, backgroundImage }: SearchProps) => {
+//   const [query, setQuery] = useState('');
+//   const [isFocused, setIsFocused] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const handleSearch = useCallback(async () => {
+//     if (!query.trim()) return;
+
+//     setLoading(true);
+//     setError(null);
+
+//     try {
+//       const res = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+//       const data = await res.json();
+
+//       if (res.ok) {
+//         onSearch(data);
+//       } else {
+//         setError(data.error || 'An error occurred while searching');
+//         onSearch([]);
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       setError('An error occurred while searching');
+//       onSearch([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, [query, onSearch]);
+
+//   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setQuery(e.target.value);
+//     setError(null);
+//   };
+
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     handleSearch();
+//   };
+
+//   const handleFocus = () => setIsFocused(true);
+//   const handleBlur = () => setIsFocused(false);
+
+//   return (
+//     <div
+//       className="relative h-[50vh] flex items-center justify-center"
+//       style={{
+//         backgroundImage: `url(${backgroundImage})`,
+//         backgroundSize: 'cover',
+//         backgroundPosition: 'center',
+//         backgroundAttachment: 'fixed',
+//       }}
+//     >
+//       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/20 dark:to-slate-900/70"></div>
+
+//       <motion.div
+//         initial={{ opacity: 0, y: 50 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.5 }}
+//         className="relative z-10 w-full max-w-3xl px-4"
+//       >
+//         <form onSubmit={handleSubmit} className="w-full">
+//           <motion.div
+//             animate={{
+//               scale: isFocused ? 1.02 : 1,
+//               boxShadow: isFocused
+//                 ? '0 15px 30px -10px rgba(0, 0, 0, 0.2)'
+//                 : '0 10px 25px -15px rgba(0, 0, 0, 0.1)',
+//             }}
+//             transition={{ duration: 0.2 }}
+//             className="flex items-center bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-full overflow-hidden shadow-xl"
+//           >
+//             <div className="absolute left-5 text-gray-500 dark:text-gray-300">
+//               <SearchIcon size={24} />
+//             </div>
+//             <input
+//               type="text"
+//               className="w-full pl-14 pr-4 py-4 text-xl text-gray-800 dark:text-white bg-transparent border-none focus:outline-none"
+//               placeholder="Search for spiritual wallpapers..."
+//               value={query}
+//               onChange={handleInputChange}
+//               onFocus={handleFocus}
+//               onBlur={handleBlur}
+//             />
+//             <button 
+//               type="submit" 
+//               className="px-4 py-2 text-purple-400 dark:text-purple-400 dark:bg-transparent hover:text-emerald-400"
+//             >
+//               Search
+//             </button>
+//           </motion.div>
+//         </form>
+
+//         {loading && (
+//           <div className="mt-4 text-center text-gray-600 dark:text-gray-300">
+//             Searching for divine inspiration...
+//           </div>
+//         )}
+
+//         {error && (
+//           <div className="mt-4 text-center text-red-500">{error}</div>
+//         )}
+//       </motion.div>
+//     </div>
+//   );
+// };
+
+// export default Search;
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useCallback } from 'react';
+import { Search as SearchIcon } from 'lucide-react';  // Import SearchIcon
 import { motion } from 'framer-motion';
-import { Search as SearchIcon } from 'lucide-react';
 import { Wallpaper } from '../types/Wallpaper';
 
-type SearchProps = {
-  onSearch: (results: Wallpaper[]) => void;
-  backgroundImage?: string;
-};
-
-const Search = ({ onSearch, backgroundImage }: SearchProps) => {
+const Search = ({ onSearch, backgroundImage }: { onSearch: (results: Wallpaper[]) => void; backgroundImage?: string }) => {
   const [query, setQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSearch = useCallback(async () => {
-    if (!query.trim()) return;
+  // Function to handle the search action
+  const handleSearch = async (searchQuery: string) => {
+    if (!searchQuery.trim()) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const res = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}`);
       const data = await res.json();
-
-      if (res.ok) {
-        onSearch(data);
+      if (data) {
+        onSearch(data);  // Pass the result to the parent component
       } else {
-        setError(data.error || 'An error occurred while searching');
+        setError('No results found');
         onSearch([]);
       }
     } catch (error) {
-      console.error(error);
       setError('An error occurred while searching');
       onSearch([]);
     } finally {
       setLoading(false);
     }
-  }, [query, onSearch]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleSearch();
+  // Handles when the user presses the Enter key
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch(query);
+    }
+  };
+
+  // Handles the button click for the search
+  const handleSearchClick = () => {
+    handleSearch(query);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value); // Set the search query
+    setError(null); // Reset any errors when user starts typing
   };
 
   const handleFocus = () => setIsFocused(true);
@@ -1035,7 +1167,7 @@ const Search = ({ onSearch, backgroundImage }: SearchProps) => {
         transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-3xl px-4"
       >
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={(e) => e.preventDefault()} className="w-full">
           <motion.div
             animate={{
               scale: isFocused ? 1.02 : 1,
@@ -1057,10 +1189,12 @@ const Search = ({ onSearch, backgroundImage }: SearchProps) => {
               onChange={handleInputChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              onKeyDown={handleKeyDown}  // Listen for Enter key press
             />
-            <button 
-              type="submit" 
-              className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600"
+            <button
+              type="button"
+              onClick={handleSearchClick}  // Trigger search on button click
+              className="px-4 py-2 text-purple-400 dark:text-purple-400 dark:bg-transparent hover:text-emerald-400"
             >
               Search
             </button>
@@ -1073,12 +1207,12 @@ const Search = ({ onSearch, backgroundImage }: SearchProps) => {
           </div>
         )}
 
-        {error && (
-          <div className="mt-4 text-center text-red-500">{error}</div>
-        )}
+        {error && <div className="mt-4 text-center text-red-500">{error}</div>}
       </motion.div>
     </div>
   );
 };
 
 export default Search;
+
+
