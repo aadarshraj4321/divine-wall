@@ -5226,6 +5226,216 @@
 
 
 
+// "use client";
+// import React, { useState, useEffect, useMemo, useCallback } from 'react';
+// import { Wallpaper } from './types/Wallpaper';
+// import WallpaperCard from './components/WallpaperCard';
+// import Pagination from './components/Pagination';
+// import Header from './components/Header';
+// import Search from './components/Search';
+
+// const Dashboard = () => {
+//   const [displayWallpapers, setDisplayWallpapers] = useState<Wallpaper[]>([]);
+//   const [originalWallpapers, setOriginalWallpapers] = useState<Wallpaper[]>([]);
+//   const [loading, setLoading] = useState<boolean>(false);
+//   const [currentPage, setCurrentPage] = useState<number>(1);
+//   const [selectedCategory, setSelectedCategory] = useState<string>('');
+//   const itemsPerPage = 20;
+
+//   const backgroundImage = "https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg";
+
+
+
+//   const categoryMap: { [key: string]: string } = useMemo(() => ({
+//     'Lord Rama': 'ram',
+//     'Lord Krishna': 'krishna',
+//     'Kalki Avatar': 'kalki',
+//     'All God': 'all_god',
+//     'Hanuman': 'hanuman',
+//     'Shiva': 'shiva',
+//     'Mata Durga': 'durga',
+//     'Mata Kali': 'kali',
+//     'Fiction': 'fiction',
+//     'Mythology': 'mythology',
+//     'Spirituality': 'spirituality',
+//     'Ganesha': 'ganesha',
+//     'Monsters': 'monsters',
+//     'Mahabharat': 'mahabharat',
+//     'Ramayan': 'ramayan',
+//     'God V Robot': 'god_vs_robot'
+
+//   }), []);
+
+//   const fetchWallpapers = useCallback(async () => {
+//     setLoading(true);
+//     try {
+//       const res = await fetch('/api/wallpapers');
+//       const data = await res.json();
+      
+//       const safeData: Wallpaper[] = Array.isArray(data) ? data : [];
+      
+//       setOriginalWallpapers(safeData);
+//       setDisplayWallpapers(safeData);
+//     } catch (error) {
+//       console.error(error);
+//       setOriginalWallpapers([]);
+//       setDisplayWallpapers([]); 
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     fetchWallpapers();
+//   }, [fetchWallpapers]);
+
+//   // New category filtering logic
+//   useEffect(() => {
+//     if (selectedCategory) {
+//       const filteredWallpapers = originalWallpapers.filter(wallpaper => 
+//         wallpaper.category === selectedCategory
+//       );
+//       setDisplayWallpapers(filteredWallpapers);
+//       setCurrentPage(1);
+//     } else {
+//       setDisplayWallpapers(originalWallpapers);
+//     }
+//   }, [selectedCategory, originalWallpapers]);
+
+//   const handleSearch = (results: Wallpaper[]) => {
+//     const safeResults: Wallpaper[] = Array.isArray(results) ? results : [];
+//     setDisplayWallpapers(safeResults);
+//     setCurrentPage(1);
+//     setSelectedCategory('');
+//   };
+
+//   const handleCategoryClick = (category: string) => {
+//     setSelectedCategory(category);
+//   };
+
+//   const indexOfLastItem = currentPage * itemsPerPage;
+//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  
+//   const currentItems = useMemo(() => {
+//     const safeDisplayWallpapers = Array.isArray(displayWallpapers) 
+//       ? displayWallpapers 
+//       : [];
+    
+//     return safeDisplayWallpapers.slice(indexOfFirstItem, indexOfLastItem);
+//   }, [displayWallpapers, indexOfFirstItem, indexOfLastItem]);
+
+//   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+//   return (
+//     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+//       <Header />
+//       <Search 
+//         onSearch={handleSearch} 
+//         backgroundImage={backgroundImage} 
+//       />
+
+//      {/* Categories Section */}
+// <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-gray-100 dark:bg-slate-800">
+//   <h2 className="text-center text-2xl font-extrabold text-gray-800 dark:text-white mb-6">Categories</h2>
+//   <div className="flex flex-wrap justify-center gap-6">
+//     {Object.keys(categoryMap).map((category) => (
+//       <button
+//         key={category}
+//         onClick={() => handleCategoryClick(categoryMap[category] || '')}
+//         className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 transform ${
+//           selectedCategory === categoryMap[category]
+//             ? 'bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg scale-105 hover:scale-110'
+//             : 'bg-white text-gray-800 border-2 border-transparent hover:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-500 dark:hover:border-indigo-400 hover:shadow-md hover:scale-105'
+//         } focus:outline-none hover:cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400`}
+//       >
+//         {category}
+//       </button>
+//     ))}
+//   </div>
+// </div>
+
+
+//       {/* Wallpapers Grid */}
+//       <div className="container mx-auto px-4">
+//         {loading ? (
+//           <div className="flex justify-center items-center h-64">
+//             <div className="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+//             <p className="ml-4 text-gray-600 dark:text-gray-300">Searching for divine inspiration...</p>
+//           </div>
+//         ) : (
+//           <>
+//             {displayWallpapers.length === 0 ? (
+//               <div className="text-center py-10">
+//                 <p className="text-xl font-semibold text-gray-800 dark:text-white">
+//                   No Wallpaper Found. Try Another Category.
+//                 </p>
+//                 <button 
+//                   onClick={() => setSelectedCategory('')}
+//                   className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg"
+//                 >
+//                   Reset Categories
+//                 </button>
+//               </div>
+//             ) : (
+//               <>
+//                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+//                   {currentItems.map((wallpaper, index) => (
+//                     <WallpaperCard
+//                       key={wallpaper.id || index}
+//                       title={wallpaper.title}
+//                       image_url={wallpaper.image_url}
+//                       category={wallpaper.category || 'Spiritual'}
+//                       resolution={wallpaper.resolution || '4K'}
+//                       onClick={() => console.log('Wallpaper clicked!')}
+//                     />
+//                   ))}
+//                 </div>
+
+//                 {(displayWallpapers?.length || 0) > itemsPerPage && (
+//                   <Pagination
+//                     itemsPerPage={itemsPerPage}
+//                     totalItems={displayWallpapers.length}
+//                     paginate={paginate}
+//                     currentPage={currentPage}
+//                   />
+//                 )}
+//               </>
+//             )}
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Wallpaper } from './types/Wallpaper';
