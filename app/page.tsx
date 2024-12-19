@@ -60,6 +60,47 @@
 
 
 
+// // app/page.tsx
+// import Dashboard from "./dashboard/page";
+// import Script from "next/script";
+
+// export default function Home() {
+//   return (
+//     <div>
+//       <Dashboard />
+
+//       {/* Google AdSense Ad Unit */}
+//       <div>
+//         <ins
+//           className="adsbygoogle"
+//           style={{ display: "block" }}
+//           data-ad-client="ca-pub-9979980575915777"
+//           data-ad-slot="1684697935"  // Replace with your unique ad slot ID
+//           data-ad-format="auto"
+//         ></ins>
+
+//         {/* Push ads into the page only after it's interactive */}
+//         <Script
+//           strategy="afterInteractive"
+//           id="adsense-script"
+//         >
+//           {`
+//             (window.adsbygoogle = window.adsbygoogle || []).push({});
+//           `}
+//         </Script>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
 // app/page.tsx
 import Dashboard from "./dashboard/page";
 import Script from "next/script";
@@ -75,7 +116,7 @@ export default function Home() {
           className="adsbygoogle"
           style={{ display: "block" }}
           data-ad-client="ca-pub-9979980575915777"
-          data-ad-slot="1684697935"  // Replace with your unique ad slot ID
+          data-ad-slot="4670756252"  // Replace with your unique ad slot ID
           data-ad-format="auto"
         ></ins>
 
