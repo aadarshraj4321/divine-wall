@@ -5244,10 +5244,12 @@ const Dashboard = () => {
 
   const backgroundImage = "https://d3tj4iy39yo2dk.cloudfront.net/public/ram/rama1.jpg";
 
+
+
   const categoryMap: { [key: string]: string } = useMemo(() => ({
     'Lord Rama': 'ram',
     'Lord Krishna': 'krishna',
-    'Kali Avatar': 'kalki',
+    'Kalki Avatar': 'kalki',
     'All God': 'all_god',
     'Hanuman': 'hanuman',
     'Shiva': 'shiva',
@@ -5332,25 +5334,26 @@ const Dashboard = () => {
         backgroundImage={backgroundImage} 
       />
 
-      {/* Categories Section */}
-      <div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-gray-100 dark:bg-slate-800">
-        <h2 className="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-4">Categories</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {Object.keys(categoryMap).map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryClick(categoryMap[category] || '')}
-              className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform ${
-                selectedCategory === categoryMap[category]
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white'
-                  : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-500 dark:hover:bg-gray-500'
-              } hover:scale-105`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
+     {/* Categories Section */}
+<div className="rounded-xl p-6 mb-8 mt-4 mx-auto max-w-4xl bg-gray-100 dark:bg-slate-800">
+  <h2 className="text-center text-2xl font-extrabold text-gray-800 dark:text-white mb-6">Categories</h2>
+  <div className="flex flex-wrap justify-center gap-6">
+    {Object.keys(categoryMap).map((category) => (
+      <button
+        key={category}
+        onClick={() => handleCategoryClick(categoryMap[category] || '')}
+        className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 transform ${
+          selectedCategory === categoryMap[category]
+            ? 'bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg scale-105 hover:scale-110'
+            : 'bg-white text-gray-800 border-2 border-transparent hover:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-500 dark:hover:border-indigo-400 hover:shadow-md hover:scale-105'
+        } focus:outline-none hover:cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400`}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
 
       {/* Wallpapers Grid */}
       <div className="container mx-auto px-4">
