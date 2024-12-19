@@ -5472,7 +5472,8 @@ const Dashboard = () => {
     'Monsters': 'monsters',
     'Mahabharat': 'mahabharat',
     'Ramayan': 'ramayan',
-    'God V Robot': 'god_vs_robot'
+    'God V Robot': 'god_vs_robot',
+    'Phone Wallpaper': 'phone_wallpaper'
 
   }), []);
 
@@ -5554,8 +5555,10 @@ const Dashboard = () => {
         onClick={() => handleCategoryClick(categoryMap[category] || '')}
         className={`px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-200 transform ${
           selectedCategory === categoryMap[category]
-            ? 'bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg scale-105 hover:scale-110'
-            : 'bg-white text-gray-800 border-2 border-transparent hover:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-500 dark:hover:border-indigo-400 hover:shadow-md hover:scale-105'
+          ? 'bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg scale-105 hover:scale-110'
+          : category === 'Phone Wallpaper'
+          ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white hover:text-orange-400 dark:hover:text-orange-400 transform animate-bounce scale-105'
+          : 'bg-white text-gray-800 border-2 border-transparent hover:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-500 dark:hover:border-indigo-400 hover:shadow-md hover:scale-105'
         } focus:outline-none hover:cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400`}
       >
         {category}
