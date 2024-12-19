@@ -21,3 +21,5 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch wallpapers' }, { status: 500 });
   }
 }
+
+

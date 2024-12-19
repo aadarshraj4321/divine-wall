@@ -5,3 +5,6 @@ export type Wallpaper = {
     category?: string;
     resolution?: string;
   };
+
+
+
