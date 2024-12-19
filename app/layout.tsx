@@ -464,9 +464,6 @@
 
 
 
-
-
-
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -508,28 +505,17 @@ export const metadata: Metadata = {
     "divine wallpapers"
   ],
   applicationName: 'DivineWall',
-  authors: [{ name: 'DivineWall' }], // Continue as is
+  authors: [{ name: 'DivineWall' }],
   creator: 'DivineWall',
   publisher: 'DivineWall',
-  formatDetection: {
-    telephone: false,
-    address: false,
-    email: false,
-  },
+  formatDetection: { telephone: false, address: false, email: false },
   metadataBase: new URL('https://www.divinewall.in/'),
   openGraph: {
     title: 'DivineWall - 4k Hindu God Wallpapers',
     description: 'Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha. 4K & 2K quality for all devices.',
     url: 'https://www.divinewall.in/',
     siteName: 'DivineWall',
-    images: [
-      {
-        url: '/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'DivineWall Logo',
-      }
-    ],
+    images: [{ url: '/logo.png', width: 1200, height: 630, alt: 'DivineWall Logo' }],
     locale: 'en_US',
     type: 'website',
   },
@@ -587,27 +573,37 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Head>
+          {/* Meta tags and other head elements */}
           <link rel="icon" href="/favicon.ico" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           <link rel="manifest" href="/site.webmanifest" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9979980575915777"
-     crossOrigin="anonymous"></script>
+          
+          {/* Google AdSense Script (placed inside <head>) */}
+          <script 
+            async 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9979980575915777"
+            crossOrigin="anonymous"
+          ></script>
         </Head>
 
-
-        {/* Render children (pages/content) */}
+        <Script
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9979980575915777"
+          crossOrigin="anonymous"
+        />
+        
+        {/* Render the page content (children) */}
         {children}
 
-        {/* Vercel Analytics component */}
+        {/* Vercel Analytics component (optional) */}
         <Analytics />
       </body>
     </html>
