@@ -483,7 +483,7 @@
 // });
 
 // export const metadata: Metadata = {
-//   title: "DivineWall - Download 4k Hindu God Wallpapers | 4K, 2K & Mobile",
+//   title: "DivineWall - Download 4k Spiritual God Wallpapers | 4K, 2K & Mobile",
 //   description: "Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha, and more. High-quality 4K, 2K wallpapers for desktop, mobile & temple decoration.",
 //   keywords: [
 //     "hindu god wallpapers",
@@ -629,9 +629,6 @@
 
 
 
-
-
-
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -651,7 +648,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DivineWall - Download 4k Spiritual Wallpapers | 4K, 2K & Mobile",
+  title: "DivineWall - Download 4k Spiritual God Wallpapers | 4K, 2K & Mobile",
   description: "Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha, and more. High-quality 4K, 2K wallpapers for desktop, mobile & temple decoration.",
   keywords: [
     "hindu god wallpapers",
@@ -777,3 +774,10 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+
+
+
+
