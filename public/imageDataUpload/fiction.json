@@ -1,14 +1,8 @@
 [
     {
       "category": "fiction",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/fiction/fiction_1.jpg",
+      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/fiction/fiction_03.png",
       "title": "Character From Hindu Mythology",
-      "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
-    },
-    {
-      "category": "fiction",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/fiction/fiction_2.jpg",
-      "title": "Character From Mythology",
       "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
     }
   ]

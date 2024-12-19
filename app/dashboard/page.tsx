@@ -5247,6 +5247,7 @@ const Dashboard = () => {
   const categoryMap: { [key: string]: string } = useMemo(() => ({
     'Lord Rama': 'ram',
     'Lord Krishna': 'krishna',
+    'Kali Avatar': 'kalki',
     'All God': 'all_god',
     'Hanuman': 'hanuman',
     'Shiva': 'shiva',
@@ -5259,6 +5260,8 @@ const Dashboard = () => {
     'Monsters': 'monsters',
     'Mahabharat': 'mahabharat',
     'Ramayan': 'ramayan',
+    'God V Robot': 'god_vs_robot'
+
   }), []);
 
   const fetchWallpapers = useCallback(async () => {
