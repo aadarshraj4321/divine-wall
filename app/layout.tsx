@@ -155,8 +155,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DivineWall - Download HD Hindu God Wallpapers | 4K, 2K & Mobile",
-  description: "Download beautiful HD wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha, and more. High-quality 4K, 2K wallpapers for desktop, mobile & temple decoration.",
+  title: "DivineWall - Download 4k Hindu God Wallpapers | 4K, 2K & Mobile",
+  description: "Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha, and more. High-quality 4K, 2K wallpapers for desktop, mobile & temple decoration.",
   keywords: [
     "hindu god wallpapers",
     "lord ram wallpaper",
@@ -187,8 +187,8 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://www.divinewall.in/'),
   openGraph: {
-    title: 'DivineWall - HD Hindu God Wallpapers',
-    description: 'Download beautiful HD wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha. 4K & 2K quality for all devices.',
+    title: 'DivineWall - 4k Hindu God Wallpapers',
+    description: 'Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha. 4K & 2K quality for all devices.',
     url: 'https://www.divinewall.in/',
     siteName: 'DivineWall',
     images: [
@@ -204,8 +204,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'DivineWall - HD Hindu God Wallpapers',
-    description: 'Download beautiful HD wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha. 4K & 2K quality.',
+    title: 'DivineWall - 4k Hindu God Wallpapers',
+    description: 'Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha. 4K & 2K quality.',
     images: ['/logo.png'],
     creator: '@divinewall',
   },
