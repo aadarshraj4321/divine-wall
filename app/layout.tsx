@@ -627,12 +627,18 @@
 
 
 
+
+
+
+
+
 // app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from 'next/head';
-import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/react';  // Import Vercel Analytics
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -648,9 +654,22 @@ export const metadata: Metadata = {
   title: "DivineWall - Download 4k Hindu God Wallpapers | 4K, 2K & Mobile",
   description: "Download beautiful 4k wallpapers of Hindu Gods - Lord Ram, Krishna, Hanuman, Shiva, Durga, Kali, Ganesha, and more. High-quality 4K, 2K wallpapers for desktop, mobile & temple decoration.",
   keywords: [
-    "hindu god wallpapers", "lord ram wallpaper", "krishna wallpaper", "hanuman wallpaper", "shiva wallpaper", 
-    "durga wallpaper", "kali wallpaper", "ganesha wallpaper", "4k wallpapers", "2k wallpapers", "phone wallpapers", 
-    "mandir wallpaper", "temple wallpaper", "spiritual wallpapers", "hindu mythology wallpapers", "mahakaal wallpaper", 
+    "hindu god wallpapers",
+    "lord ram wallpaper",
+    "krishna wallpaper",
+    "hanuman wallpaper",
+    "shiva wallpaper",
+    "durga wallpaper",
+    "kali wallpaper",
+    "ganesha wallpaper",
+    "4k wallpapers",
+    "2k wallpapers",
+    "phone wallpapers",
+    "mandir wallpaper",
+    "temple wallpaper",
+    "spiritual wallpapers",
+    "hindu mythology wallpapers",
+    "mahakaal wallpaper",
     "divine wallpapers"
   ],
   applicationName: 'DivineWall',
@@ -712,7 +731,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.divinewall.in/',
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: 'your-google-verification-code', // Add your Google verification code
   },
   other: {
     'msapplication-TileColor': '#da532c',
@@ -734,7 +753,7 @@ export default function RootLayout({
           <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
           <link rel="manifest" href="/site.webmanifest" />
           
-          {/* Google AdSense Script (placed inside <head> for global availability) */}
+          {/* Google AdSense Script (placed inside <head>) */}
           <script 
             async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9979980575915777"
@@ -742,6 +761,13 @@ export default function RootLayout({
           ></script>
         </Head>
 
+        <Script
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9979980575915777"
+          crossOrigin="anonymous"
+        />
+        
         {/* Render the page content (children) */}
         {children}
 
