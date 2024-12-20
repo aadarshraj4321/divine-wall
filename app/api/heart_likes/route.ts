@@ -52,18 +52,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
 import { db } from '@/configs/db'; // Import the database instance
 import { wallpapers } from '@/configs/Schema'; // Import your table schema
-import { eq } from 'drizzle-orm'; // Use `eq` for comparison
+import { eq } from 'drizzle-orm'; // Use eq for comparison
 import { NextRequest, NextResponse } from 'next/server'; // Import NextRequest and NextResponse
 
 // POST handler
@@ -101,7 +92,8 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Handle unsupported methods (e.g., GET, PUT, DELETE)
-export async function GET() {
+// Handle unsupported methods
+export async function handle(req: NextRequest) {
+  console.log(req);
   return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
 }
