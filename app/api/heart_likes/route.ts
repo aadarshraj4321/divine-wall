@@ -91,9 +91,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
   }
 }
-
-// Handle unsupported methods
-export async function handle(req: NextRequest) {
-  console.log(req);
-  return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
-}
