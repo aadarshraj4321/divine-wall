@@ -2306,7 +2306,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { Wallpaper } from '../types/Wallpaper';
+// import { Wallpaper } from '../types/Wallpaper';
 
 // Dynamically import icons to reduce bundle size
 const Download = dynamic(() => import('lucide-react').then((mod) => mod.Download));
