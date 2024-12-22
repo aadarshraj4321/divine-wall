@@ -2300,6 +2300,518 @@
 
 
 
+// "use client";
+
+// import React, { useState, useCallback, useEffect } from 'react';
+// import Image from 'next/image';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import dynamic from 'next/dynamic';
+// // import { Wallpaper } from '../types/Wallpaper';
+
+// // Dynamically import icons to reduce bundle size
+// const Download = dynamic(() => import('lucide-react').then((mod) => mod.Download));
+// const Heart = dynamic(() => import('lucide-react').then((mod) => mod.Heart));
+// const Expand = dynamic(() => import('lucide-react').then((mod) => mod.Expand));
+// const XCircle = dynamic(() => import('lucide-react').then((mod) => mod.XCircle));
+
+// type WallpaperCardProps = {
+//   id: number;  // Change `id` to number
+//   title: string;
+//   image_url: string;
+//   resolution?: string;
+//   category?: string;
+//   onClick?: () => void;
+// };
+
+// const WallpaperCard: React.FC<WallpaperCardProps> = ({ 
+//   id, 
+//   title, 
+//   image_url, 
+//   resolution = '4K', 
+//   category = 'Spiritual',
+//   onClick 
+// }) => {
+//   const [isHovered, setIsHovered] = useState(false);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [isLiked, setIsLiked] = useState(false);
+
+//   // Check if the wallpaper is already liked from localStorage on mount
+//   useEffect(() => {
+//     const likedWallpapers = JSON.parse(localStorage.getItem('likedWallpapers') || '[]');
+//     if (likedWallpapers.includes(id)) {
+//       setIsLiked(true);
+//     }
+//   }, [id]);
+
+//   const openModal = useCallback(() => {
+//     setIsModalOpen(true);
+//   }, []);
+
+//   const closeModal = useCallback(() => {
+//     setIsModalOpen(false);
+//   }, []);
+
+//   const handleDownload = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();
+
+//     try {
+//       const response = await fetch(`/api/download?url=${encodeURIComponent(image_url)}`, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json' },
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Download failed');
+//       }
+
+//       const blob = await response.blob();
+//       const link = document.createElement('a');
+//       link.href = URL.createObjectURL(blob);
+//       link.download = title;
+//       link.click();
+//     } catch (error: unknown) {
+//       if (error instanceof Error) {
+//         console.error('Download error:', error.message);
+//       }
+//     }
+//   }, [image_url, title]);
+
+//   const handleHeartClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();  // Prevent triggering onClick on parent
+
+//     if (isLiked) return; // Prevent further clicks if already liked
+
+//     try {
+//       // Add wallpaper ID to localStorage if not already liked
+//       const likedWallpapers = JSON.parse(localStorage.getItem('likedWallpapers') || '[]');
+//       if (!likedWallpapers.includes(id)) {
+//         likedWallpapers.push(id);
+//         localStorage.setItem('likedWallpapers', JSON.stringify(likedWallpapers));
+//         setIsLiked(true);
+//       }
+
+//       const response = await fetch(`/api/heart_likes`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ id }),  // Send wallpaper id to the API
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Failed to like the wallpaper');
+//       }
+
+//       console.log('Wallpaper liked');
+//     } catch (error: unknown) {
+//       if (error instanceof Error) {
+//         console.error('Heart click error:', error.message);
+//       }
+//     }
+//   }, [id, isLiked]);
+
+//   if (!image_url) {
+//     return null;
+//   }
+
+//   return (
+//     <>
+//       <motion.div
+//         initial={{ opacity: 0, y: 20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.4 }}
+//         className="relative group"
+//         onClick={onClick}
+//       >
+//         <div 
+//           onMouseEnter={() => setIsHovered(true)}
+//           onMouseLeave={() => setIsHovered(false)}
+//           className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
+//         >
+//           <div className="relative w-full aspect-[3/4] overflow-hidden">
+//             <Image
+//               src={image_url}
+//               alt={title}
+//               fill
+//               className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+//               priority
+//             /> 
+
+//             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//           </div>
+
+//           <AnimatePresence>
+//             {isHovered && (
+//               <motion.div 
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 exit={{ opacity: 0 }}
+//                 className="absolute inset-0 bg-black/30 flex items-center justify-center space-x-4"
+//               >
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={handleDownload}
+//                 >
+//                   <Download className="text-white" size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={handleHeartClick}  // Heart button click handler
+//                 >
+//                   <Heart className={`text-white ${isLiked ? 'fill-red-500' : ''}`} size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={(e) => { e.stopPropagation(); openModal(); }}
+//                 >
+//                   <Expand className="text-white" size={24} />
+//                 </motion.button>
+//               </motion.div>
+//             )}
+//           </AnimatePresence>
+//         </div>
+
+//         <div className="mt-4 px-2">
+//           <div className="flex justify-between items-center">
+//             <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate max-w-[70%]">
+//               {title}
+//             </h3>
+//             <div className="flex space-x-2">
+//               <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+//                 {resolution}
+//               </span>
+//               <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+//                 {category}
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+
+//       {isModalOpen && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           exit={{ opacity: 0 }}
+//           className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+//           onClick={closeModal}
+//         >
+//           <div className="relative bg-black rounded-lg shadow-lg overflow-hidden max-w-3xl w-full transition-all">
+//             <button
+//               onClick={closeModal}
+//               className="absolute top-4 right-4 text-white bg-black/40 p-2 rounded-full hover:bg-black/60 transition"
+//             >
+//               <XCircle size={28} className="text-white" />
+//             </button>
+//             <Image
+//               src={image_url}
+//               alt={title}
+//               width={800}
+//               height={600}
+//               className="rounded-lg"
+//             />
+//           </div>
+//         </motion.div>
+//       )}
+//     </>
+//   );
+// };
+
+// export default React.memo(WallpaperCard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+
+// import React, { useState, useCallback, useEffect } from 'react';
+// import Image from 'next/image';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import dynamic from 'next/dynamic';
+// // import { Wallpaper } from '../types/Wallpaper';
+
+// // Dynamically import icons to reduce bundle size
+// const Download = dynamic(() => import('lucide-react').then((mod) => mod.Download));
+// const Heart = dynamic(() => import('lucide-react').then((mod) => mod.Heart));
+// const Expand = dynamic(() => import('lucide-react').then((mod) => mod.Expand));
+// const XCircle = dynamic(() => import('lucide-react').then((mod) => mod.XCircle));
+
+// type WallpaperCardProps = {
+//   id: number;  // Change `id` to number
+//   title: string;
+//   image_url: string;
+//   resolution?: string;
+//   category?: string;
+//   onClick?: () => void;
+// };
+
+// const WallpaperCard: React.FC<WallpaperCardProps> = ({ 
+//   id, 
+//   title, 
+//   image_url, 
+//   resolution = '4K', 
+//   category = 'Spiritual',
+//   onClick 
+// }) => {
+//   const [isHovered, setIsHovered] = useState(false);
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [isLiked, setIsLiked] = useState(false);
+
+//   // Check if the wallpaper is already liked from localStorage on mount
+//   useEffect(() => {
+//     const likedWallpapers = JSON.parse(localStorage.getItem('likedWallpapers') || '[]');
+//     if (likedWallpapers.includes(id)) {
+//       setIsLiked(true);
+//     }
+//   }, [id]);
+
+//   const openModal = useCallback(() => {
+//     setIsModalOpen(true);
+//   }, []);
+
+//   const closeModal = useCallback(() => {
+//     setIsModalOpen(false);
+//   }, []);
+
+//   const handleDownload = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();
+
+//     try {
+//       const response = await fetch(`/api/download?url=${encodeURIComponent(image_url)}`, {
+//         method: 'GET',
+//         headers: { 'Content-Type': 'application/json' },
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Download failed');
+//       }
+
+//       const blob = await response.blob();
+//       const link = document.createElement('a');
+//       link.href = URL.createObjectURL(blob);
+//       link.download = title;
+//       link.click();
+//     } catch (error: unknown) {
+//       if (error instanceof Error) {
+//         console.error('Download error:', error.message);
+//       }
+//     }
+//   }, [image_url, title]);
+
+//   const handleHeartClick = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();  // Prevent triggering onClick on parent
+
+//     if (isLiked) return; // Prevent further clicks if already liked
+
+//     try {
+//       // Add wallpaper ID to localStorage if not already liked
+//       const likedWallpapers = JSON.parse(localStorage.getItem('likedWallpapers') || '[]');
+//       if (!likedWallpapers.includes(id)) {
+//         likedWallpapers.push(id);
+//         localStorage.setItem('likedWallpapers', JSON.stringify(likedWallpapers));
+//         setIsLiked(true);
+//       }
+
+//       const response = await fetch(`/api/heart_likes`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ id }),  // Send wallpaper id to the API
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Failed to like the wallpaper');
+//       }
+
+//       console.log('Wallpaper liked');
+//     } catch (error: unknown) {
+//       if (error instanceof Error) {
+//         console.error('Heart click error:', error.message);
+//       }
+//     }
+//   }, [id, isLiked]);
+
+
+//   const handleDownloadTrack = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.stopPropagation();
+
+//     try {
+//       const response = await fetch('/api/most_downloads', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ id }),
+//       });
+
+//       if(!response.ok) {
+//         throw new Error("Failed to track download")
+//       }
+
+//       console.log("Wallpaper Incremented");
+
+//     } catch(error: unknown) {
+//       if(error instanceof Error) {
+//         console.error("Download increment error:", error.message);
+//       }
+//     }
+//   }, [id]);
+
+
+//   if (!image_url) {
+//     return null;
+//   }
+
+//   return (
+//     <>
+//       <motion.div
+//         initial={{ opacity: 0, y: 20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.4 }}
+//         className="relative group"
+//         onClick={onClick}
+//       >
+//         <div 
+//           onMouseEnter={() => setIsHovered(true)}
+//           onMouseLeave={() => setIsHovered(false)}
+//           className="relative overflow-hidden rounded-3xl shadow-2xl cursor-pointer"
+//         >
+//           <div className="relative w-full aspect-[3/4] overflow-hidden">
+//             <Image
+//               src={image_url}
+//               alt={title}
+//               fill
+//               className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+//               priority
+//             /> 
+
+//             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+//           </div>
+
+//           <AnimatePresence>
+//             {isHovered && (
+//               <motion.div 
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 exit={{ opacity: 0 }}
+//                 className="absolute inset-0 bg-black/30 flex items-center justify-center space-x-4"
+//               >
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={handleDownload}
+//                 >
+//                   <Download className="text-white" size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={handleHeartClick}  // Heart button click handler
+//                 >
+//                   <Heart className={`text-white ${isLiked ? 'fill-red-500' : ''}`} size={24} />
+//                 </motion.button>
+//                 <motion.button
+//                   whileTap={{ scale: 0.9 }}
+//                   className="bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/40 transition"
+//                   onClick={(e) => { e.stopPropagation(); openModal(); }}
+//                 >
+//                   <Expand className="text-white" size={24} />
+//                 </motion.button>
+//               </motion.div>
+//             )}
+//           </AnimatePresence>
+//         </div>
+
+//         <div className="mt-4 px-2">
+//           <div className="flex justify-between items-center">
+//             <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate max-w-[70%]">
+//               {title}
+//             </h3>
+//             <div className="flex space-x-2">
+//               <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+//                 {resolution}
+//               </span>
+//               <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+//                 {category}
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+
+//       {isModalOpen && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           exit={{ opacity: 0 }}
+//           className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+//           onClick={closeModal}
+//         >
+//           <div className="relative bg-black rounded-lg shadow-lg overflow-hidden max-w-3xl w-full transition-all">
+//             <button
+//               onClick={closeModal}
+//               className="absolute top-4 right-4 text-white bg-black/40 p-2 rounded-full hover:bg-black/60 transition"
+//             >
+//               <XCircle size={28} className="text-white" />
+//             </button>
+//             <Image
+//               src={image_url}
+//               alt={title}
+//               width={800}
+//               height={600}
+//               className="rounded-lg"
+//             />
+//           </div>
+//         </motion.div>
+//       )}
+//     </>
+//   );
+// };
+
+// export default React.memo(WallpaperCard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 
 import React, { useState, useCallback, useEffect } from 'react';
@@ -2369,6 +2881,7 @@ const WallpaperCard: React.FC<WallpaperCardProps> = ({
       link.href = URL.createObjectURL(blob);
       link.download = title;
       link.click();
+      handleDownloadTrack(e);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error('Download error:', error.message);
@@ -2409,6 +2922,33 @@ const WallpaperCard: React.FC<WallpaperCardProps> = ({
       }
     }
   }, [id, isLiked]);
+
+
+  const handleDownloadTrack = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    try {
+      const response = await fetch('/api/most_downloads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if(!response.ok) {
+        throw new Error("Failed to track download")
+      }
+
+      console.log("Wallpaper Incremented");
+
+    } catch(error: unknown) {
+      if(error instanceof Error) {
+        console.error("Download increment error:", error.message);
+      }
+    }
+  }, [id]);
+
 
   if (!image_url) {
     return null;

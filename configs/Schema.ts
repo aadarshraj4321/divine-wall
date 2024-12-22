@@ -18,6 +18,7 @@ export const wallpapers = pgTable('wallpapers', {
   description: text('description'),            // Optional description for the wallpaper
   created_at: timestamp('created_at').defaultNow(), // Auto-generated timestamp when wallpaper is created
   heart_likes: integer('heart_likes').default(0), // Default value for likes set to 0
+  downloads: integer('downloads').default(0), // Added downloads counter
 });
 
 
