@@ -5895,6 +5895,7 @@ const Dashboard = () => {
   const categoryMap: { [key: string]: string } = useMemo(() => ({
     'Lord Rama': 'ram',
     'Lord Krishna': 'krishna',
+    'Radha Rani': 'radha',
     'Kalki Avatar': 'kalki',
     'All God': 'all_god',
     'Hanuman': 'hanuman',
