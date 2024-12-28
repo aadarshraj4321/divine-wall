@@ -1,28 +1,11 @@
 [
     {
       "category": "hanuman",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/hanuman/han_01.png",
-      "title": "Hanuman",
+      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/hanuman/hanuman10.png",
+      "title": "Lord Hanuman",
       "description": "An epic battle between a powerful god and a fearsome monster, showcasing a clash of mythical forces in an intense struggle for dominance."
-    },
-    {
-      "category": "hanuman",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/hanuman/han_04.png",
-      "title": "Hanuman",
-      "description": "The holy trinity—Shiva, Vishnu, and Brahma—unite to defeat the demon king Banasura, who threatens the cosmic order."
-    },
-    {
-        "category": "hanuman",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/hanuman/han_05.png",
-        "title": "Hanuman",
-        "description": "The holy trinity—Shiva, Vishnu, and Brahma—unite to defeat the demon king Banasura, who threatens the cosmic order."
-      },
-      {
-        "category": "hanuman",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/hanuman/han_06.png",
-        "title": "Hanuman",
-        "description": "The holy trinity—Shiva, Vishnu, and Brahma—unite to defeat the demon king Banasura, who threatens the cosmic order."
-      }
+    }
+   
 
   ]
   

@@ -1,28 +1,23 @@
 [
     {
       "category": "rayaman",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/rayaman.png",
+      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/ramayan5.png",
       "title": "Rayaman",
       "description": "An epic battle between a powerful god and a fearsome monster, showcasing a clash of mythical forces in an intense struggle for dominance."
     },
     {
         "category": "rayaman",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/rayaman_01.png",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/ramayan6.png",
         "title": "Rayaman",
         "description": "An epic battle between a powerful god and a fearsome monster, showcasing a clash of mythical forces in an intense struggle for dominance."
       },
       {
         "category": "rayaman",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/rayaman_02.png",
-        "title": "Rayaman",
-        "description": "An epic battle between a powerful god and a fearsome monster, showcasing a clash of mythical forces in an intense struggle for dominance."
-      },
-      {
-        "category": "rayaman",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/rayaman_03.png",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/rayaman/ramayan7.png",
         "title": "Rayaman",
         "description": "An epic battle between a powerful god and a fearsome monster, showcasing a clash of mythical forces in an intense struggle for dominance."
       }
+
 
   ]
   
