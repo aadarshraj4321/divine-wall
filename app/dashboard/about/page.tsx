@@ -1256,12 +1256,12 @@ const About = () => {
                       className="text-blue-600 hover:underline"
                     >
                       {/* contact@divinewall.com */}
-                      aadarshraj4321@gmail.com
+                      rishabhr717@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <PhoneIcon className="mr-4 text-green-500" size={24} />
                   <div>
                     <p className="font-medium text-gray-800 dark:text-gray-200">Phone</p>
@@ -1272,7 +1272,7 @@ const About = () => {
                       +916207297112
                     </a>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex items-center">
                   <MapPinIcon className="mr-4 text-red-500" size={24} />
