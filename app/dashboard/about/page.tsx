@@ -988,7 +988,7 @@ const About = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Contact Information */}
-            <div className="p-6 rounded-xl bg-white text-gray-800 dark:bg-slate-700 text-gray-200 shadow-md">
+            <div className="p-6 rounded-xl bg-white text-gray-800 dark:bg-slate-700 dark:text-gray-200 shadow-md">
               <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
               
               <div className="space-y-6">
@@ -1031,14 +1031,14 @@ const About = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="p-6 rounded-xl bg-white text-gray-800 dark:bg-slate-700 text-gray-200 shadow-md">
+            <div className="p-6 rounded-xl bg-white text-gray-800 dark:bg-slate-700 dark:text-gray-200 shadow-md">
               <h3 className="text-2xl font-semibold mb-6">Send us a Message</h3>
               <form className="space-y-4">
                 <div>
                   <label className="block mb-2">Name</label>
                   <input 
                     type="text" 
-                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 text-white border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 dark:text-white dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Name"
                   />
                 </div>
@@ -1047,7 +1047,7 @@ const About = () => {
                   <label className="block mb-2">Email</label>
                   <input 
                     type="email" 
-                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 text-white border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 dark:text-white dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Email"
                   />
                 </div>
@@ -1056,7 +1056,7 @@ const About = () => {
                   <label className="block mb-2">Message</label>
                   <textarea 
                     rows={4} 
-                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 text-white border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 rounded-lg bg-gray-100 text-gray-800 border-gray-300 dark:bg-slate-600 dark:text-white dark:border-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Message"
                   ></textarea>
                 </div>
