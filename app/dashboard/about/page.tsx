@@ -1132,7 +1132,7 @@
 "use client"
 
 import React from 'react';
-import { SunIcon, HeartIcon, StarIcon, SendIcon, MapPinIcon, PhoneIcon, MailIcon } from 'lucide-react';
+import { SunIcon, HeartIcon, StarIcon, SendIcon, MapPinIcon, MailIcon } from 'lucide-react';
 import Header from '../components/Header';
 
 const About = () => {
@@ -1260,7 +1260,7 @@ const About = () => {
                     </a>
                   </div>
                 </div>
-
+{/* 
                 <div className="flex items-center">
                   <PhoneIcon className="mr-4 text-green-500" size={24} />
                   <div>
@@ -1272,7 +1272,7 @@ const About = () => {
                       +916207297112
                     </a>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex items-center">
                   <MapPinIcon className="mr-4 text-red-500" size={24} />
