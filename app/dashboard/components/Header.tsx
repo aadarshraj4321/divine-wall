@@ -1152,7 +1152,7 @@ const Header = React.memo(() => {
               <Link href="/" className="hover:text-blue-200 transition-colors">
                 Home
               </Link>
-              <Link href="/about" className="hover:text-blue-200 transition-colors">
+              <Link href="/dashboard/about" className="hover:text-blue-200 transition-colors">
                 About
               </Link>
             </div>
