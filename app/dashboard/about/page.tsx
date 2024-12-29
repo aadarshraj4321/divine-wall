@@ -1132,7 +1132,7 @@
 "use client"
 
 import React from 'react';
-import { SunIcon, HeartIcon, StarIcon, SendIcon, MapPinIcon, PhoneIcon, MailIcon } from 'lucide-react';
+import { SunIcon, HeartIcon, StarIcon, SendIcon, MapPinIcon, MailIcon } from 'lucide-react';
 import Header from '../components/Header';
 
 const About = () => {
