@@ -1133,7 +1133,7 @@
 
 import React from 'react';
 import { SunIcon, HeartIcon, StarIcon, SendIcon, MapPinIcon, PhoneIcon, MailIcon } from 'lucide-react';
-import Header from '../components/Header';
+import Header from '../dashboard/components/Header';
 
 const About = () => {
   return (
@@ -1340,26 +1340,3 @@ const About = () => {
 };
 
 export default About;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
