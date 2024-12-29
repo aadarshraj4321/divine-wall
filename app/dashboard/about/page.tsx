@@ -1382,7 +1382,7 @@ const About = () => {
   return (
     <div className="relative min-h-screen">
       {/* Fixed Header */}
-      <Header />
+      <HeaderAbout />
       
       {/* Main Content Container with padding-top to account for fixed header */}
       <div className="min-h-screen pt-16 bg-gradient-to-br from-[#ece6dd] to-[#ebe9e6] dark:from-[#2C3E50] dark:to-[#34495E]">
