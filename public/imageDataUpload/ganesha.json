@@ -1,13 +1,43 @@
 [
     {
       "category": "ganesha",
-      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesh_01.png",
+      "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha4.png",
       "title": "Friend Ganesha",
       "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
     },
     {
         "category": "ganesha",
-        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesh_02.png",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha5.png",
+        "title": "Friend Ganesha",
+        "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
+      },
+      {
+        "category": "ganesha",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha6.png",
+        "title": "Friend Ganesha",
+        "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
+      },
+      {
+        "category": "ganesha",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha7.png",
+        "title": "Friend Ganesha",
+        "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
+      },
+      {
+        "category": "ganesha",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha8.png",
+        "title": "Friend Ganesha",
+        "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
+      },
+      {
+        "category": "ganesha",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha9.png",
+        "title": "Friend Ganesha",
+        "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
+      },
+      {
+        "category": "ganesha",
+        "image_url": "https://d3tj4iy39yo2dk.cloudfront.net/public/ganesha/ganesha10.png",
         "title": "Friend Ganesha",
         "description": "The god of preservation, known for his avatars like Rama, Krishna, and Narasimha, who restore cosmic order."
       }
